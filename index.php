@@ -27,7 +27,28 @@ if(!isset($_SESSION['user_id'])){
         <div class="table-responsive">
             <h4 align="center">Online User</h4>
             <p align="right">Hi -<b> <?php echo $_SESSION['username']; ?></b>-<a href="logout.php">LogOut</a></p>
+            <div id="user_details"></div>
         </div>
     </div>
 </body>
 </html>
+
+<script>
+    $(document).ready(function () {
+
+        fetch_user();
+
+        function fetch_user() {
+
+            $.ajax({
+                url:"fetch_user.php",
+                method: "POST",
+                success:function(data){
+                    $('#user_details').html(data);
+                }
+            })
+
+        }
+        
+    });
+</script>
