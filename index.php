@@ -17,8 +17,10 @@ if(!isset($_SESSION['user_id'])){
     <title>Live Chat Application</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.rawgit.com/mervick/emojionearea/master/dist/emojionearea.min.css">
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.rawgit.com/mervick/emojionearea/master/dist/emojionearea.min.js"></script>
 </head>
 <body>
     <div class="container">
@@ -94,6 +96,10 @@ if(!isset($_SESSION['user_id'])){
                 width:400
             });
             $('#user_dialog_'+to_user_id).dialog('open');
+            $('#chat_message_'+to_user_id).emojioneArea({
+                pickerPosition: "top",
+                toneStyle: "bullet"
+            });
         });
 
         $(document).on('click', '.send_chat', function () {
@@ -104,7 +110,9 @@ if(!isset($_SESSION['user_id'])){
                 method:"POST",
                 data:{to_user_id:to_user_id, chat_message:chat_message},
                 success:function(data){
-                    $('#chat_message_'+to_user_id).val('');
+                    //$('#chat_message_'+to_user_id).val('');
+                    var element = $('#chat_message_'+to_user_id).emojioneArea();
+                    element[0].emojioneArea.setText('');
                     $('#chat_history_'+to_user_id).html(data);
                 }
             })

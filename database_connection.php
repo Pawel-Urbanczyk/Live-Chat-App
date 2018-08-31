@@ -1,6 +1,6 @@
 <?php
 
-$connect = new PDO("mysql:host=localhost;dbname=chat", "root", "");
+$connect = new PDO("mysql:host=localhost;dbname=chat;charset=utf8mb4", "root", "");
 
 function fetch_user_last_activity($user_id, $connect){
 
