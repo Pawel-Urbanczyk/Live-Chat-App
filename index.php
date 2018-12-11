@@ -291,6 +291,20 @@ if(!isset($_SESSION['user_id'])){
                 resetForm: true
             });
         });
+
+        $(document).on('click', '.remove_chat', function (){
+            var chat_message_id = $(this).attr('id');
+            if(confirm("Are You sure You want to remove this message?")){
+                $.ajax({
+                    url: "remove_chat.php",
+                    method: "POST",
+                    data:{chat_message_id:chat_message_id},
+                    success:function(data){
+                        update_chat_history_data();
+                    }
+                })
+            }
+        });
         
     });
 </script>
